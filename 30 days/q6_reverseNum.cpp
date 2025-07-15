@@ -1,43 +1,24 @@
-// Online C++ compiler to run C++ program online
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-int reverse(int x) {
+class Solution {
+public:
+    int reverse(int x) {
 
-        vector <int> a;   //to store digit 
-        vector <int> b; // to store base
+        int num=x, digit=0, rev=0;
 
-        int num=x, i=0;
+        while(num != 0){
+            digit = num % 10;
 
-        while(num > 0){
-            int x = num % 10;
-            int y = i;
-            a.push_back(x);
-            b.push_back(y);
+            if (rev > INT_MAX / 10 || (rev == INT_MAX / 10 && digit > 7)) return 0;
+            if (rev < INT_MIN / 10 || (rev == INT_MIN / 10 && digit < -8)) return 0;
+
+            rev = rev * 10 + digit;
             num /= 10;
-            i++;
         }
 
-        reverse(b.begin(), b.end());
 
-        int n = a.size(), ans=0;
-        i=0;
-        
-        while(n){
-            
-            ans += a[i] * static_cast<int>(pow(10,b[i])+0.5);
-            cout<<ans<<endl;
-            i++;
-            n--;
-        }
-        
-        return ans;
+
+        return rev;
     }
-
-int main() {
-    // Write C++ code here
-    
-    cout<<reverse(123);
-
-    return 0;
-}
+};
